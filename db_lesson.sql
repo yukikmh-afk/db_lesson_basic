@@ -156,7 +156,10 @@ ALTER TABLE departments RENAME COLUMN depertment_id TO department_id;
  /* ------------ 内部結合ではなく外部結合を使った理由 ------------ */
  /*
     例えば1人で複数の日報を提出していた場合、内部結合では1つのレポートしか取得できないのではと思い外部結合を選択
-    実際に試したところ複数のレポートを取得できた為認識が間違っていたことを理解いたしました。*/
+    実際に試したところ複数のレポートを取得できた為認識が間違っていたことを理解いたしました。
+    内部結合では両テーブルと条件が一致するものだけを抜き出す。
+    外部結合では基準となるテーブルを決めて、基準ではないテーブルにデータがない場合はNULLで表示される
+    */
 SELECT p.name,d.name,r.content FROM people AS p
 INNER JOIN departments AS d ON 
   p.department_id = d.department_id
